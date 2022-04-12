@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block title %} Добавить пациенты {% endblock title %}
+
+{% block navbar-content %}
+<i class="fas fa-user-plus"></i>&nbsp;&nbsp;Добавить пациента
+{% endblock navbar-content %}
+
+{% block time %}
+  <div class="col-sm">
+    <center>
+      <span id="clock" style="color: #89cff0;"></span>
+    </center>
+  </div>
+{% endblock time %}
+
+{% block nav-btn %}
+<a class="btn btn-outline-danger btn-sm border-light text-light" id="btn-nav" data-bs-toggle="modal" data-bs-target="#logoutModal">Logout</a>
+{% endblock nav-btn %}
+
+{% block footer %} style="color: #89cff0; text-decoration: none;"{% endblock footer %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10">
+        <div class="card card-body border-dark text-primary mt-4">
+          <span class="text-center txt-sm">{% block card-title %}ЗАПОЛНИТЕ ФОРМУ НИЖЕ{% endblock card-title %}</span>
+        </div>
+        <form {% block Action %} action="/add_patient" {% endblock Action %} method="POST" outocomplete="off" enctype="multipart/form-data" class="card p-3 border-dark mt-3">
+              {% csrf_token %}
+          <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text side-label"><span class="txt-sm">Имя</span></span>
+            <input type="text" class="form-control" name="name" id="name" maxlength="40" placeholder="Имя пациента" {% block Value-name %}{% endblock Value-name %}>
+          </div>
+
+          <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text side-label"><span class="txt-sm">Телефон</span></span>
+            <input type="text" class="form-control" name="phone" id="phone" placeholder="Номер телафона пациента"{% block Value-phone %}{% endblock Value-phone %}>
+          </div>
+
+          <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text side-label"><span class="txt-sm">Email</span></span>
+            <input type="text" class="form-control" name="email" id="email" maxlength="40" placeholder="Почта пациента"{% block Value-email %}{% endblock Value-email %}>
+          </div>
+
+          <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text side-label"><span class="txt-sm">Возраст</span></span>
+            <input type="text" class="form-control" name="age" id="age" maxlength="3" placeholder="Возраст пациента"{% block Value-age %}{% endblock Value-age %}>
+          </div>
+
+          <div class="input-group input-group-sm mb-3">
+            <label class="input-group-text side-label"><span class="txt-sm">Пол</span></label>
+            <select class="form-select" name="gender" id="gender">
+              {% block option %}
+              <option value="" hidden>Выбор возраста</option>
+               {% endblock option %}
+              <option disabled></option>
+              <option>М</option>
+              <option>Ж</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <textarea class="form-control txt-sm" name="note" rows="7" placeholder="Описание обязательно...">{% block note %}{% endblock note %}</textarea>
+          </div>
+
+          <div class="d-grid gap-2 mb-3">
+            <button type="submit" class="btn btn-primary btn-sm" id="btn-add">
+              {% block Btn-add %}
+              <i class="fas fa-plus">&nbsp;&nbsp;Добавить пациента</i>
+              {% endblock Btn-add %}
+            </button>
+            
+              {% block Btn-reset %}{% endblock Btn-reset %}
+            <a href="{% url 'backend' %}" class="btn btn-dark btn-sm"><i class="fas fa-chevron-left"></i>&nbsp;&nbsp; Назад </a>
+          </div>
+
+          {% block Id-hidden %}{% endblock Id-hidden %}
+        
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

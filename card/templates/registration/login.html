@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Профессиональная больница{% endblock title %}
+
+{% block navbar-content %}
+  <i class="fas fa-stethoscope"></i>&nbsp;&nbsp;Логин
+{% endblock navbar-content %}
+
+{% block nav-btn %}
+  <a href="{% url 'frontend' %}" class="btn btn-outline-primary btn-sm border-light text-light" id="btn-nav">Назад</a>
+{% endblock nav-btn %}
+
+{% block footer %} style="color: #a9a9a9; text-decoration: none;"{% endblock footer %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="card p-3 border-dark">
+            <span class="btn btn-outline-dark mt-3 txt-sm"><i class="fas fa-lock"></i>&nbsp;&nbsp;ДОСТУП ОГРАНИЧЕН </span>
+            <form method="POST" outocomplete="off" novalidate>
+            {% csrf_token %}
+              <div class="input-group mb-3 mt-5">
+                <span class="btn input-group-text border-secondary bg-light icon-width"><i class="fas fa-user-alt"></i></span>
+                <input type="text" class="form-control txt-sm" name="username" placeholder="Имя пользователя">
+              </div>
+              <div class="input-group mb-3">
+                <span class="btn input-group-text border-secondary bg-light icon-width"><i class="fas fa-lock"></i></span>
+                <input type="password" class="form-control txt-sm" name="password" placeholder="Пароль">
+              </div>
+              <input class="btn btn-primary btn-sm mt-4 mb-3" type="submit" value="Вход" id="btn-enter">
+            </form>
+        </div>
+        <!--Ошибка с backend-->
+          {% if form.errors %}
+          <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+          <script>
+              swal("Отклонен!", "Введите правильные данные", "error")
+          </script>
+          {% endif %}
+        <!--Пульс сердца-->
+      <div style="text-align:center" id="heart">
+        <i class="text-primary fas fa-heartbeat fa-10x blink_me"></i>
+      </div>
+
+    </div>
+  {% endblock content %}

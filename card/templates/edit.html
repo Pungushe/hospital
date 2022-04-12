@@ -1,0 +1,52 @@
+{% extends 'add_patient.html' %}
+
+{% block title %} Установить пациенты {% endblock title %}
+
+<!-- Контент navbar -->
+{% block navbar-content %}
+  <i class="fas fa-user-edit"></i>&nbsp;&nbsp;{{ patient.name }}
+{% endblock navbar-content %}
+
+<!-- Название карты -->
+{% block card-title %}
+ Зарегистрирован: <span class="text-dark">{{ patient.created_at|date:'m/d/Y (H:i)' }}</span>
+{% endblock card-title %}
+
+<!-- Кнопка добавить -->
+{% block Btn-add %}
+<i class="fas fa-hdd">&nbsp;&nbsp;Сохранить</i>
+{% endblock Btn-add %}
+
+<!-- Кнопка сброса -->
+{% block Btn-reset %}
+  <button type="resert" class="btn btn-secondary btn-sm txt-sm"><i class="fas fa-sync-alt"></i>&nbsp;&nbsp;Сброс</button>
+{% endblock Btn-reset %}
+
+<!-- Кнопка добавить -->
+{% block Action %} action="/edit_patient" {% endblock Action %}
+
+<!-- ##############Все вводы########### -->
+<!-- Имя -->
+{% block Value-name %} value="{{ patient.name }}" {% endblock Value-name %}
+
+<!-- Телефон -->
+{% block Value-phone %} value="{{ patient.phone }}" {% endblock Value-phone %}
+
+<!-- Email -->
+{% block Value-email %} value="{{ patient.email }}" {% endblock Value-email %}
+
+<!-- Возраст -->
+{% block Value-age %} value="{{ patient.age }}" {% endblock Value-age %}
+
+<!-- Пол -->
+{% block option %}
+<option style="background-color: #d3d3d3; color: #007bff;">{{patient.gender}}</option>
+{% endblock option %}
+
+<!-- Запись -->
+{% block note %}{{patient.note}}{% endblock note %}
+
+<!-- Скрытый Id -->
+{% block Id-hidden %}
+  <input type="hidden" value="{{ patient.id }}" name="id">
+{% endblock Id-hidden %}

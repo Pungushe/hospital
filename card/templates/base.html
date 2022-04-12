@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+{% load static %}
+
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
+    <!-- Favicon -->
+    <link href="{% static 'img/favicon.ico' %}" rel="shortcut icon">
+    <!-- Logo -->
+    <link href="{% static 'img/logo.ico' %}" rel="shortcut icon">
+    <!-- Static CSS -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    
+    <title>{% block title %}Профессиональная больница{% endblock title %}</title>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="col-sm">
+            <a class="navbar-brand flex-grow-1" id="nav-content">
+              {% block navbar-content %}
+                <i class="fas fa-briefcase-medical"></i>&nbsp;&nbsp;Профессиональная больница
+              {% endblock navbar-content %}
+            </a>
+          </div>
+
+          <!--  Время -->
+          {% block time %}{% endblock time %}
+
+          <div class="col-sm">
+            {% block nav-btn %}
+              <a href="{% url 'backend' %}" class="btn btn-outline-info btn-sm border-light" id="btn-nav">Логин</a>
+            {% endblock nav-btn %}
+          </div>
+        </nav>
+      </header>
+
+      <!-- Block content  -->
+      {% block content %}{% endblock content %}
+      </div>
+
+      <!-- Footer -->
+      <footer class="bg-dark text-center text-lg-start text-light" id="footer">
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+          Copyright&copy; {% now "Y" %} <span id="all-rights">Все права защищены</span> | Сделано с
+          <i class="text-danger fas fa-heartbeat blink_me" style="font-size: 15px;"></i> к
+          <a href="#" type="_blank" {% block footer %} style="color: #0dcaf0; text-decoration: none;"{% endblock footer %}> Профессиональным врачам</a>
+        </div>
+      </footer>
+
+      <!-- Modal -->
+      <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="logoutModal"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;&nbsp;Logout</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center txt-sm">
+              <span class="text-danger txt-sm"><i class="fas fa-sign-out-alt fa-3x mt-4"></i></span>
+              <div class="mt-4 mb-4 text-danger">Уверены что хотите выйти </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary btn-sm txt-sm" data-bs-dismiss="modal">Отмена</button>
+              <a href="{% url 'logout' %}" type="button" class="btn btn-outline-danger btn-sm txt-sm">Logout</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bootstrap JS -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+      <!-- JQuery -->
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+      <!-- InputMask -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8-beta.17/jquery.inputmask.min.js" integrity="sha512-zdfH1XdRONkxXKLQxCI2Ak3c9wNymTiPh5cU4OsUavFDATDbUzLR+SYWWz0RkhDmBDT0gNSUe4xrQXx8D89JIQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <!-- SweetAlert -->
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+      <!-- Static JS -->
+      <script src="{%  static 'js/script.js'%}"></script>
+
+      <script>
+        (function blink () {
+          $('.blink_me').fadeOut(1000).fadeIn(1000, blink);
+        })();
+      </script>
+      
+    </body>
+  </html>
